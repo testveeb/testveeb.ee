@@ -1,0 +1,33 @@
+# ======= START wordpress_hardening =======
+# https://wordpress.org/support/article/hardening-wordpress/#securing-wp-includes
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
+# https://wordpress.org/support/article/hardening-wordpress/#securing-wp-config-php
+<files wp-config.php>
+Require all denied
+</files>
+# ======= END wordpress_hardening =======
+
+
+# BEGIN WordPress
+# Käsud (read) "BEGIN WordPress" ja "END WordPress" vahel on
+# dünaamilselt genereeritud ja neid tuleks muuta üksnes WordPressi filtrite abil.
+# Kõik muudatused nende kahe markeri vahel kirjutatakse üle.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /test123/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /test123/index.php [L]
+</IfModule>
+
+# END WordPress

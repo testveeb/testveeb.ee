@@ -1,0 +1,6 @@
+# ======= START wordpress_hardening =======
+# https://www.wpbeginner.com/wp-tutorials/how-to-disable-php-execution-in-certain-wordpress-directories/
+<Files *.php>
+Require all denied
+</Files>
+# ======= END wordpress_hardening =======
