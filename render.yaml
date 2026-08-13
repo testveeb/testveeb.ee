@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: testveeb-staging
+    env: php
+    buildCommand: ""
+    startCommand: "php -S 0.0.0.0:$PORT index.php"
+    envVars:
+      - key: PHP_VERSION
+        value: 8.2.0
